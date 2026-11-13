@@ -27,7 +27,37 @@ By default the form opens the visitor's email app with the message filled in, ad
 https://formspree.io (sign up with support@chennaitreat.com), then put its URL in `formEndpoint`
 in `site.config.mjs`.
 
-## Publish on Cloudflare Pages (free), domain at Zoho
+GitHub Pages (below) is the chosen host. Cloudflare Pages is an alternative.
+
+## Publish on GitHub Pages (free), domain at Zoho
+
+`.github/workflows/deploy.yml` builds the site and publishes it on every push to `main`.
+
+1. **Make the repo public** (Settings > General > Danger Zone > Change visibility). GitHub Pages
+   is free only for public repos; a private repo needs the paid GitHub Team plan. The site has
+   no secrets, so public is fine.
+2. **Turn on Pages:** Settings > Pages > Build and deployment > Source: **GitHub Actions**.
+3. **Run the deploy:** merge to `main`, or Actions > Deploy to GitHub Pages > Run workflow.
+4. **Add DNS records in Zoho** (Domains > ak-systems.in > DNS / Manage DNS). Keep the Zoho Mail
+   MX and TXT records as they are.
+
+   | Type | Host | Value |
+   |---|---|---|
+   | A | @ | 185.199.108.153 |
+   | A | @ | 185.199.109.153 |
+   | A | @ | 185.199.110.153 |
+   | A | @ | 185.199.111.153 |
+   | CNAME | www | ak-systems-chennai-treat.github.io |
+
+   Delete any other A or CNAME record on `@` or `www` (for example Zoho's parking page).
+5. **Custom domain:** Settings > Pages > Custom domain: `ak-systems.in` > Save. When the DNS
+   check turns green (minutes to a few hours), tick **Enforce HTTPS**.
+6. Optional, recommended: verify the domain under the organisation's Settings > Pages so no one
+   else can claim it.
+
+`public/_headers` is only used by Cloudflare; GitHub Pages ignores it.
+
+## Alternative: Cloudflare Pages (free)
 
 One-time setup, about 20 minutes:
 
