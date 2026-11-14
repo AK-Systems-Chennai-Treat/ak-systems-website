@@ -1,31 +1,30 @@
 import { SITE } from '../site.config.mjs';
-import { I, MARK, CTMARK, mapSvg } from './icons.mjs';
+import { I, CTMARK, mapSvg } from './icons.mjs';
 
 const CT = SITE.chennaitreat;
 const NAV = [['/', 'Home'], ['/products', 'Products'], ['/services', 'Services'], ['/quality', 'Quality'], ['/about', 'About'], ['/contact', 'Contact']];
 const href = p => (p === '/' ? '/' : p + '/');
 const ext = (url, label, cls) => `<a class="btn ${cls}" href="${url}" target="_blank" rel="noopener">${label}</a>`;
 
-let markN = 0;
-const mark = () => { const id = 'akg' + (++markN); return MARK.replace('id="g"', `id="${id}"`).replace('url(#g)', `url(#${id})`); };
-const logo = (style = '') => `<a class="logo" href="/" aria-label="AK Systems home"${style}>${mark()}<div><b>AK</b> <span>Systems</span></div></a>`;
+const logo = () => `<a class="logo" href="/" aria-label="AK Systems home"><picture><source srcset="/assets/logo-mark.webp" type="image/webp"><img class="mk" src="/assets/logo-mark.png" alt="AK" width="235" height="96"></picture><span class="wm">Systems</span></a>`;
+const logoFull = () => `<a class="logo-full" href="/" aria-label="AK Systems home"><picture><source srcset="/assets/logo-full.webp" type="image/webp"><img src="/assets/logo-full.png" alt="AK Systems" width="600" height="407" loading="lazy"></picture></a>`;
 
-function header(path, dark) {
-  return `<header class="hdr ${dark ? 'dark' : ''}"><div class="wrap">${logo()}
+function header(path, inHero) {
+  return `<header class="hdr dark ${inHero ? '' : 'solid'}"><div class="wrap">${logo()}
 <nav class="nav" aria-label="Main">${NAV.map(([p, l]) => `<a href="${href(p)}" class="${p === path ? 'on' : ''}"${p === path ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav>
-<a class="btn ${dark ? 'd' : 'p'} cta" href="/contact/">Start a project ${I.arrow}</a>
+<a class="btn d cta" href="/contact/">Start a project ${I.arrow}</a>
 <button class="burger" type="button" aria-label="Open menu" aria-controls="mmenu" aria-expanded="false" data-menu-open>${I.menu}</button></div></header>`;
 }
 
 function mobileMenu(path) {
-  return `<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu"><div class="top">${logo(' style="color:#fff"')}<button class="x" type="button" aria-label="Close menu" data-menu-close>${I.x}</button></div>
+  return `<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu"><div class="top">${logo()}<button class="x" type="button" aria-label="Close menu" data-menu-close>${I.x}</button></div>
 <nav>${NAV.map(([p, l]) => `<a href="${href(p)}" class="${p === path ? 'on' : ''}">${l} ${I.arrow}</a>`).join('')}</nav>
 <div style="margin-top:auto;padding:24px 0 32px;display:grid;gap:10px"><a class="btn p" style="justify-content:center" href="/contact/">Start a project</a>${ext(CT.site, 'Visit ChennaiTreat', 'o" style="justify-content:center')}<div style="color:#7F88B0;font-size:13px;text-align:center;margin-top:8px"><a href="tel:${SITE.phoneHref}">${SITE.phone}</a> · <a href="mailto:${SITE.email}">${SITE.email}</a></div></div></div>`;
 }
 
 function footer() {
   return `<footer class="ftr"><div class="wrap"><div class="top">
-<div class="about">${logo()}<p>AK Systems builds quality software products and services, and operates ChennaiTreat, a local deals and voucher platform for Tamil Nadu.</p>
+<div class="about">${logoFull()}<p>AK Systems builds quality software products and services, and operates ChennaiTreat, a local deals and voucher platform for Tamil Nadu.</p>
 <div style="color:#7F88B0;font-size:13px;line-height:1.7">GSTIN <span class="mono" style="color:#C9CFF0">${SITE.gstin}</span><br>Tiruchirappalli, Tamil Nadu</div></div>
 <div><h4>Company</h4><ul><li><a href="/about/">About</a></li><li><a href="/quality/">Quality approach</a></li><li><a href="/contact/?topic=Careers">Careers</a></li><li><a href="/contact/">Contact</a></li></ul></div>
 <div><h4>What we do</h4><ul><li><a href="/products/">Products</a></li><li><a href="/services/">Software services</a></li><li><a href="/services/">Mobile apps</a></li><li><a href="/quality/">QA &amp; testing</a></li></ul></div>
@@ -45,7 +44,7 @@ function layout({ path, title, description, body, darkHero = false }) {
   const canonical = SITE.url + (path === '/' ? '/' : path + '/');
   const fullTitle = path === '/' ? `${SITE.name} | Quality software products and services` : `${title} | ${SITE.name}`;
   const org = {
-    '@context': 'https://schema.org', '@type': 'Organization', name: SITE.name, url: SITE.url, logo: SITE.url + '/assets/logo.svg',
+    '@context': 'https://schema.org', '@type': 'Organization', name: SITE.name, url: SITE.url, logo: SITE.url + '/assets/icon-512.png',
     email: SITE.email, telephone: SITE.phoneHref, taxID: SITE.gstin,
     address: { '@type': 'PostalAddress', streetAddress: 'B3J, Rangakavery Apartment, Chockalingapuram, Edamalaipatty Pudur', addressLocality: 'Tiruchirappalli', addressRegion: 'Tamil Nadu', postalCode: '620012', addressCountry: 'IN' },
     brand: { '@type': 'Brand', name: 'ChennaiTreat', url: CT.site },
@@ -58,15 +57,16 @@ function layout({ path, title, description, body, darkHero = false }) {
 <title>${fullTitle}</title>
 <meta name="description" content="${description}">
 <link rel="canonical" href="${canonical}">
-<meta name="theme-color" content="#141838">
-<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0B1230">
+<link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/assets/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${SITE.name}">
 <meta property="og:title" content="${fullTitle}">
 <meta property="og:description" content="${description}">
 <meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${SITE.url}/assets/og-image.png">
+<meta property="og:image" content="${SITE.url}/assets/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">

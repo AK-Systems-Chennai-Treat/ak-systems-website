@@ -87,7 +87,8 @@ After that, every merge to `main` goes live automatically within a minute or two
 Run `node build.mjs` and upload the **contents** of `dist/` to the host's web root
 (`public_html` on cPanel). `_headers` is only used by Cloudflare and can be ignored elsewhere.
 
-## Images
+## Logo and icons
 
-`og-image.png` (link previews) and `apple-touch-icon.png` were made with
-`node tools/make-images.cjs` (needs Playwright). Re-run only if the logo changes.
+The master logo is `brand/ak-systems-logo.png`. To change the logo, replace that file and run
+`python3 tools/make-logo.py brand/ak-systems-logo.png` (needs `pip install pillow numpy scipy`).
+It rebuilds the header mark, footer logo, favicons, app icons and the link preview image in `src/assets/`.

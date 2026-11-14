@@ -294,3 +294,11 @@ body.menu-open .mmenu{display:flex}
 @media (max-width:760px){.toc{display:none}}
 @media (max-width:760px){.qgrid,.cgrid{grid-template-columns:1fr!important;gap:32px!important}.ct-phones,.shot-ph{max-width:100%}}
 img{max-width:100%;height:auto}
+
+/* ---- AK Systems logo (2026-11-14) ---- */
+.logo{gap:10px}
+.logo .mk{width:auto;height:34px;display:block}
+.logo .wm,.hdr.dark .logo .wm,.mmenu .logo .wm{font-size:14px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:#D5DBEA;margin-top:2px}
+.hdr.dark.solid{background:var(--ink);border-color:#1E2647}
+.logo-full img{display:block;width:200px;height:auto}
+@media (max-width:760px){.logo .mk{height:30px}.logo .wm{font-size:12.5px;letter-spacing:.26em}.logo-full img{width:170px}}
