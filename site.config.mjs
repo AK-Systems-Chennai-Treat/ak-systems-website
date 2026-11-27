@@ -7,9 +7,9 @@ export const SITE = {
   gstin: '33ENMPS4453L1ZD',
   address: 'B3J, Rangakavery Apartment, Chockalingapuram, Edamalaipatty Pudur, Tiruchirappalli, Tamil Nadu 620012, India',
   email: 'support@chennaitreat.com',
-  phone: '+91 97912 67733',
-  phoneHref: '+919791267733',
-  whatsapp: 'https://wa.me/919791267733',
+  phone: '+91 93847 67733',
+  phoneHref: '+919384767733',
+  whatsapp: 'https://wa.me/919384767733',
   hours: 'Mon to Sat, 10 am to 6 pm',
   grievance: { name: 'Ilangovan Rajendran', email: 'grievance@chennaitreat.com' },
   people: [
